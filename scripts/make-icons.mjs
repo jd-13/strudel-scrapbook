@@ -3,12 +3,13 @@
 import { writeFileSync } from 'node:fs';
 import { deflateSync } from 'node:zlib';
 
-const BG = [26, 32, 64];
-const TEAL = [73, 207, 196];
-const ORANGE = [255, 157, 87];
-const LINE = [58, 66, 110];
+// White Elephant Audio palette: ultra-violet ground, white marks, pink accent.
+const BG = [100, 94, 157];
+const HIT = [255, 255, 255];
+const ACCENT = [242, 141, 191];
+const LINE = [138, 132, 190];
 
-// Rows of a 4-row, 8-step grid: 1 = teal hit, 2 = orange hit.
+// Rows of a 4-row, 8-step grid: 1 = white hit, 2 = pink accent.
 const GRID = [
   [0, 0, 1, 0, 0, 0, 1, 0],
   [1, 1, 1, 1, 1, 1, 1, 2],
@@ -24,7 +25,7 @@ function shapes(pad) {
   for (let c = 0; c <= 8; c += 4) out.push([pad + c * cw - 0.004, pad, 0.008, inner, LINE]);
   GRID.forEach((row, r) =>
     row.forEach((v, c) => {
-      if (v) out.push([pad + c * cw + cw * 0.12, pad + r * rh + rh * 0.18, cw * 0.76, rh * 0.64, v === 1 ? TEAL : ORANGE]);
+      if (v) out.push([pad + c * cw + cw * 0.12, pad + r * rh + rh * 0.18, cw * 0.76, rh * 0.64, v === 1 ? HIT : ACCENT]);
     }),
   );
   return out;

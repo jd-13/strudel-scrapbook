@@ -10,6 +10,7 @@
   import { renderDescription } from './lib/text';
   import { withHeader, extractMetadata } from './lib/strudelMeta';
   import { codeFromStrudelUrl, isStrudelIdUrl, strudelLink } from './lib/strudelUrl';
+  import logoUrl from './assets/wea-logo.svg';
   import { parseImport, textFileToSnippet, type Parsed } from './lib/backup';
   import { downloadExport, pickFiles } from './lib/files';
   import { engine, init, stop, toggle } from './lib/engine.svelte';
@@ -321,7 +322,10 @@
 <div class="page">
   <header>
     <div class="titlebar">
-      <h1>Strudel Scrapbook</h1>
+      <div class="brand">
+        <a class="maker" href="https://whiteelephantaudio.com" target="_blank" rel="noopener">White Elephant Audio</a>
+        <h1>Strudel Scrapbook</h1>
+      </div>
       <div class="tools">
         <button type="button" onclick={() => newSnippet()}>New <kbd>n</kbd></button>
         <button type="button" onclick={pasteNew}>Paste <kbd>p</kbd></button>
@@ -389,6 +393,9 @@
   <footer class="muted">
     Snippets live in this browser only, so export regularly (<kbd>x</kbd>). Patterns are evaluated and played by
     <a href="https://strudel.cc" target="_blank" rel="noopener">Strudel</a> (AGPL-3.0-or-later) with its default sample sets.
+    <a class="logo" href="https://whiteelephantaudio.com" target="_blank" rel="noopener" style="--logo: url({logoUrl})">
+      <span class="visually-hidden">White Elephant Audio</span>
+    </a>
   </footer>
 </div>
 
@@ -421,6 +428,9 @@
   @media (max-width: 600px) { .page { padding-inline: 16px; } }
   header { display: flex; flex-direction: column; gap: 14px; }
   .titlebar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: flex-end; justify-content: space-between; }
+  .brand { display: flex; flex-direction: column; gap: 6px; }
+  .maker { font-weight: 800; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--note); text-decoration: none; }
+  .maker:hover { text-decoration: underline; }
   h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 6vw, 3.1rem); line-height: 1; letter-spacing: -0.02em; margin: 0; }
   .tools { display: flex; flex-wrap: wrap; gap: 6px; }
   .searchbar { position: sticky; top: 0; z-index: 10; display: flex; gap: 8px; align-items: center; padding: 8px 0; background: var(--bg); }
@@ -447,6 +457,10 @@
   .empty { padding: 40px 0; color: var(--muted); }
   footer { font-size: 0.85rem; max-width: 70ch; }
   footer a { color: var(--ink); }
+  /* The logo is drawn in white, so it is used as a mask and takes the theme colour. */
+  footer .logo { display: block; width: 132px; aspect-ratio: 3600 / 1726; margin-top: 20px; background: var(--note); mask: var(--logo) center / contain no-repeat; }
+  footer .logo:hover { background: var(--ink); }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .dropzone { position: fixed; inset: 12px; z-index: 60; border: 3px dashed var(--layer); border-radius: 12px; background: color-mix(in srgb, var(--bg) 85%, transparent); display: grid; place-items: center; pointer-events: none; font-family: var(--display); font-size: 1.4rem; }
   .toasts { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); z-index: 70; display: flex; flex-direction: column; gap: 8px; align-items: center; width: min(560px, calc(100% - 32px)); }
   .toast { display: flex; gap: 12px; align-items: center; justify-content: space-between; width: 100%; background: var(--ink); color: var(--bg); padding: 9px 12px; border-radius: 6px; font-size: 0.88rem; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25); }

@@ -1,40 +1,40 @@
-/* Tokens and base styles carried over from the reference pattern sheets. */
+/* Tokens and base styles. Palette and type follow White Elephant Audio (whiteelephantaudio.com). */
 :root {
-  --bg: #e9ecf3;
-  --surface: #f7f8fb;
+  --bg: #ecebf4;
+  --surface: #f8f7fc;
   --roll: #ffffff;
-  --roll-alt: #f1f3f8;
-  --roll-dark-key: #eef1f7;
-  --ink: #1a2040;
-  --muted: #59607f;
-  --line: #cdd3e2;
-  --line-strong: #9aa3bd;
-  --note: #0b7a85;
-  --layer: #d05a12;
-  --ghost: #9aa3bd;
-  --str: #8a3d06;
-  --comment: #6b7290;
+  --roll-alt: #f3f2f9;
+  --roll-dark-key: #efeef7;
+  --ink: #392b58;
+  --muted: #67628a;
+  --line: #d8d5e8;
+  --line-strong: #a6a1c6;
+  --note: #645e9d;
+  --layer: #c2457f;
+  --ghost: #a6a1c6;
+  --str: #8e2a62;
+  --comment: #77729a;
   --danger: #b3261e;
-  --overlay: rgba(20, 24, 45, 0.45);
-  --display: 'Bricolage Grotesque', 'Avenir Next', 'Segoe UI', sans-serif;
-  --body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  --overlay: rgba(45, 3, 32, 0.45);
+  --display: 'Nunito', 'Avenir Next', 'Segoe UI', sans-serif;
+  --body: 'Nunito', 'Segoe UI', system-ui, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --bg: #11152a; --surface: #191f39; --roll: #141a31; --roll-alt: #10152a; --roll-dark-key: #101529;
-    --ink: #e7e9f5; --muted: #99a0bf; --line: #2b3355; --line-strong: #4a5480;
-    --note: #49cfc4; --layer: #ff9d57; --ghost: #5a648f; --str: #ffb880; --comment: #7f87aa;
-    --danger: #ff8a80; --overlay: rgba(5, 7, 16, 0.6);
+    --bg: #17122a; --surface: #211a38; --roll: #1b1530; --roll-alt: #161127; --roll-dark-key: #151026;
+    --ink: #ecebf7; --muted: #a7a2c8; --line: #342a52; --line-strong: #574d82;
+    --note: #a59fe0; --layer: #f28dbf; --ghost: #6a6296; --str: #f5a8cf; --comment: #8c86b2;
+    --danger: #ff8a80; --overlay: rgba(12, 2, 10, 0.6);
     color-scheme: dark;
   }
 }
 :root[data-theme='dark'] {
-  --bg: #11152a; --surface: #191f39; --roll: #141a31; --roll-alt: #10152a; --roll-dark-key: #101529;
-  --ink: #e7e9f5; --muted: #99a0bf; --line: #2b3355; --line-strong: #4a5480;
-  --note: #49cfc4; --layer: #ff9d57; --ghost: #5a648f; --str: #ffb880; --comment: #7f87aa;
-  --danger: #ff8a80; --overlay: rgba(5, 7, 16, 0.6);
+  --bg: #17122a; --surface: #211a38; --roll: #1b1530; --roll-alt: #161127; --roll-dark-key: #151026;
+    --ink: #ecebf7; --muted: #a7a2c8; --line: #342a52; --line-strong: #574d82;
+    --note: #a59fe0; --layer: #f28dbf; --ghost: #6a6296; --str: #f5a8cf; --comment: #8c86b2;
+    --danger: #ff8a80; --overlay: rgba(12, 2, 10, 0.6);
   color-scheme: dark;
 }
 
