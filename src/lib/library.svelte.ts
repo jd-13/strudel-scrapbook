@@ -8,9 +8,11 @@ export interface Settings {
   vim: boolean;
   sort: SortMode;
   lastExport: string | null;
+  /** The welcome dialog has been dismissed. */
+  introSeen: boolean;
 }
 
-const DEFAULT_SETTINGS: Settings = { vim: true, sort: 'category', lastExport: null };
+const DEFAULT_SETTINGS: Settings = { vim: true, sort: 'category', lastExport: null, introSeen: false };
 
 export const lib = $state({
   loaded: false,

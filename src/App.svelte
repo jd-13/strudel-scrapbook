@@ -19,6 +19,7 @@
   import ImportDialog from './components/ImportDialog.svelte';
   import CategoriesDialog from './components/CategoriesDialog.svelte';
   import HelpDialog from './components/HelpDialog.svelte';
+  import IntroDialog from './components/IntroDialog.svelte';
 
   /* ---------- state ---------- */
   let query = $state('');
@@ -28,6 +29,7 @@
   let importing = $state<{ parsed: Parsed; fileName: string } | null>(null);
   let showHelp = $state(false);
   let showCategories = $state(false);
+  let introOpen = $state(false);
   let dragging = $state(false);
   let lastDeleted: Snippet | null = null;
   let pending: { key: string; at: number } | null = null;
@@ -64,6 +66,13 @@
   const flat = $derived(sections.flatMap((s) => s.items));
   const selected = $derived(flat.find((s) => s.id === selectedId) ?? null);
   const grouped = $derived(!query.trim() && lib.settings.sort === 'category');
+  // Shown on first open, and again when asked for from the help dialog.
+  const showIntro = $derived(introOpen || (lib.loaded && !lib.settings.introSeen));
+
+  function closeIntro() {
+    introOpen = false;
+    if (!lib.settings.introSeen) saveSettings({ introSeen: true });
+  }
 
   $effect(() => {
     if (flat.length && !flat.some((s) => s.id === selectedId)) selectedId = flat[0].id;
@@ -235,7 +244,7 @@
   }
 
   /* ---------- keyboard ---------- */
-  const overlayOpen = () => !!(editor || importing || showHelp || showCategories);
+  const overlayOpen = () => !!(editor || importing || showHelp || showCategories || showIntro);
 
   function twoKey(key: string): boolean {
     const t = performance.now();
@@ -421,7 +430,8 @@
     ondone={(msg) => { importing = null; toast(msg, { ms: 5000 }); }} />
 {/if}
 {#if showCategories}<CategoriesDialog initial={selected?.category ?? null} onclose={() => (showCategories = false)} />{/if}
-{#if showHelp}<HelpDialog onclose={() => (showHelp = false)} />{/if}
+{#if showHelp}<HelpDialog onclose={() => (showHelp = false)} onintro={() => { showHelp = false; introOpen = true; }} />{/if}
+{#if showIntro}<IntroDialog onclose={closeIntro} onkeys={() => { closeIntro(); showHelp = true; }} />{/if}
 
 <style>
   .page { max-width: 1120px; margin: 0 auto; padding: 28px 20px 64px; display: flex; flex-direction: column; gap: 32px; }

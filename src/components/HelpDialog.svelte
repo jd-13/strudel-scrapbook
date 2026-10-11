@@ -3,7 +3,7 @@
   import { lib } from '../lib/library.svelte';
   import { engine } from '../lib/engine.svelte';
 
-  let { onclose }: { onclose: () => void } = $props();
+  let { onclose, onintro }: { onclose: () => void; onintro: () => void } = $props();
   let root: HTMLDivElement;
   onMount(() => root.focus());
 
@@ -74,7 +74,10 @@
       <li>Strudel engine: {engine.status}{engine.error ? ` (${engine.error})` : ''}.</li>
     </ul>
     <p class="muted small">Grids and sound come from <a href="https://strudel.cc" target="_blank" rel="noopener">Strudel</a> (AGPL-3.0-or-later), loaded in your browser. Samples load from Strudel's sample CDN the first time they play.</p>
-    <div class="row end"><button type="button" onclick={onclose}>Close <kbd>Esc</kbd></button></div>
+    <div class="row end">
+      <button type="button" onclick={onintro}>Show the introduction</button>
+      <button type="button" onclick={onclose}>Close <kbd>Esc</kbd></button>
+    </div>
   </div>
 </div>
 
