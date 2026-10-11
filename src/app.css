@@ -1,0 +1,86 @@
+/* Tokens and base styles carried over from the reference pattern sheets. */
+:root {
+  --bg: #e9ecf3;
+  --surface: #f7f8fb;
+  --roll: #ffffff;
+  --roll-alt: #f1f3f8;
+  --roll-dark-key: #eef1f7;
+  --ink: #1a2040;
+  --muted: #59607f;
+  --line: #cdd3e2;
+  --line-strong: #9aa3bd;
+  --note: #0b7a85;
+  --layer: #d05a12;
+  --ghost: #9aa3bd;
+  --str: #8a3d06;
+  --comment: #6b7290;
+  --danger: #b3261e;
+  --overlay: rgba(20, 24, 45, 0.45);
+  --display: 'Bricolage Grotesque', 'Avenir Next', 'Segoe UI', sans-serif;
+  --body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #11152a; --surface: #191f39; --roll: #141a31; --roll-alt: #10152a; --roll-dark-key: #101529;
+    --ink: #e7e9f5; --muted: #99a0bf; --line: #2b3355; --line-strong: #4a5480;
+    --note: #49cfc4; --layer: #ff9d57; --ghost: #5a648f; --str: #ffb880; --comment: #7f87aa;
+    --danger: #ff8a80; --overlay: rgba(5, 7, 16, 0.6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: #11152a; --surface: #191f39; --roll: #141a31; --roll-alt: #10152a; --roll-dark-key: #101529;
+  --ink: #e7e9f5; --muted: #99a0bf; --line: #2b3355; --line-strong: #4a5480;
+  --note: #49cfc4; --layer: #ff9d57; --ghost: #5a648f; --str: #ffb880; --comment: #7f87aa;
+  --danger: #ff8a80; --overlay: rgba(5, 7, 16, 0.6);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-padding-top: 96px; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5; }
+[hidden] { display: none !important; }
+
+code, kbd, pre, input.mono { font-family: var(--mono); }
+pre { margin: 0; font-size: 0.82rem; line-height: 1.55; overflow-x: auto; padding: 10px 12px; background: var(--roll); border: 1px solid var(--line); border-radius: 4px; color: var(--ink); }
+pre .s { color: var(--str); }
+pre .c { color: var(--comment); font-style: italic; }
+
+button, .btn {
+  font-family: var(--mono); font-size: 0.78rem; color: var(--ink); background: transparent;
+  border: 1px solid var(--line-strong); border-radius: 4px; padding: 6px 11px; cursor: pointer;
+  text-decoration: none; line-height: 1.2; display: inline-flex; align-items: center; gap: 6px;
+}
+button:hover, .btn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+button.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+button.primary:hover { background: var(--note); border-color: var(--note); }
+button.danger { color: var(--danger); border-color: var(--danger); }
+button.danger:hover { background: var(--danger); color: var(--bg); }
+button:disabled { opacity: 0.5; cursor: default; }
+button kbd, .btn kbd { font-size: 0.7rem; opacity: 0.7; }
+
+:focus-visible { outline: 2px solid var(--layer); outline-offset: 2px; }
+
+input[type='text'], input[type='search'], input[type='number'], textarea, select {
+  font: inherit; color: var(--ink); background: var(--roll); border: 1px solid var(--line-strong);
+  border-radius: 4px; padding: 7px 10px; width: 100%;
+}
+textarea { resize: vertical; min-height: 4.5em; }
+label { display: flex; flex-direction: column; gap: 4px; font-size: 0.82rem; color: var(--muted); }
+
+kbd {
+  font-family: var(--mono); font-size: 0.78em; padding: 1px 5px; border: 1px solid var(--line-strong);
+  border-bottom-width: 2px; border-radius: 3px; background: var(--surface); color: var(--ink); white-space: nowrap;
+}
+
+.why code, .blurb code, .muted code { font-family: var(--mono); font-size: 0.92em; color: var(--ink); }
+.muted { color: var(--muted); }
+
+/* Overlays */
+.backdrop { position: fixed; inset: 0; background: var(--overlay); display: flex; align-items: flex-start; justify-content: center; padding: 4vh 16px; z-index: 50; overflow-y: auto; }
+.dialog { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; width: min(100%, 760px); padding: 20px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25); }
+.dialog h2 { font-family: var(--display); font-weight: 600; font-size: 1.4rem; margin: 0; }
+.dialog .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.dialog .row.end { justify-content: flex-end; }

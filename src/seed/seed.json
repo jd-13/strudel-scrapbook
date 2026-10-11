@@ -1,0 +1,927 @@
+{
+  "categories": [
+    {
+      "id": "grooves",
+      "name": "Grooves",
+      "blurb": "Four starting points. Everything here is one string of mini-notation, with at most one function after it.",
+      "order": 0,
+      "updated": "2026-10-11T00:00:00.000Z"
+    },
+    {
+      "id": "euclid",
+      "name": "Euclidean rhythms",
+      "blurb": "`sound(hits, steps, rotation)` spaces the hits as evenly as the steps allow. Many traditional rhythms fall out of it.",
+      "order": 1,
+      "updated": "2026-10-11T00:00:00.000Z"
+    },
+    {
+      "id": "breaks",
+      "name": "Breaks and fills",
+      "blurb": "Sixteen-step breakbeats, and ways to vary them from bar to bar.",
+      "order": 2,
+      "updated": "2026-10-11T00:00:00.000Z"
+    },
+    {
+      "id": "linear",
+      "name": "Linear drumming",
+      "blurb": "Linear means no two drums are ever struck at the same moment. In Strudel that is a sequence with no commas in it: every step holds exactly one sound. Each grid has at most one hit per column.",
+      "order": 3,
+      "updated": "2026-10-11T00:00:00.000Z"
+    },
+    {
+      "id": "feel",
+      "name": "Dynamics and feel",
+      "blurb": "Volume and density do as much as the notes. These use `.gain()`, `.ply()` and chance.",
+      "order": 4,
+      "updated": "2026-10-11T00:00:00.000Z"
+    },
+    {
+      "id": "poly",
+      "name": "Polyrhythm and odd meters",
+      "blurb": "Layers that disagree about how long the bar is.",
+      "order": 5,
+      "updated": "2026-10-11T00:00:00.000Z"
+    },
+    {
+      "id": "mini",
+      "name": "Mini-notation shapes",
+      "blurb": "Rhythm and phrasing written inside the quotes, before any function is called.",
+      "order": 6,
+      "updated": "2026-10-11T00:00:00.000Z"
+    },
+    {
+      "id": "scales",
+      "name": "Degrees and scales",
+      "blurb": "Write numbers with `n()`, do arithmetic on them, and let `.scale()` turn the result into notes.",
+      "order": 7,
+      "updated": "2026-10-11T00:00:00.000Z"
+    },
+    {
+      "id": "chords",
+      "name": "Chords",
+      "blurb": "Two ways to get movement out of a chord progression.",
+      "order": 8,
+      "updated": "2026-10-11T00:00:00.000Z"
+    },
+    {
+      "id": "layers",
+      "name": "Layers and canons",
+      "blurb": "Copy the pattern, change the copy, play both.",
+      "order": 9,
+      "updated": "2026-10-11T00:00:00.000Z"
+    },
+    {
+      "id": "time",
+      "name": "Time transforms",
+      "blurb": "Functions that rearrange when the notes happen, cycle by cycle.",
+      "order": 10,
+      "updated": "2026-10-11T00:00:00.000Z"
+    },
+    {
+      "id": "gen",
+      "name": "Chance",
+      "blurb": "Randomness that stays musical. Each roll shows one possible outcome; Strudel's random values are different every cycle.",
+      "order": 11,
+      "updated": "2026-10-11T00:00:00.000Z"
+    }
+  ],
+  "snippets": [
+    {
+      "id": "seed-four-on-the-floor",
+      "name": "Four on the floor",
+      "description": "Commas stack layers inside one string. Kick on every beat, clap on two and four, and `[~ hh]*4` puts the hat on every offbeat.",
+      "category": "grooves",
+      "tags": [
+        "drums",
+        "house"
+      ],
+      "code": "s(\"bd*4, ~ cp ~ cp, [~ hh]*4\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:00.000Z",
+      "updated": "2026-10-11T00:00:00.000Z"
+    },
+    {
+      "id": "seed-rock-backbeat",
+      "name": "Rock backbeat",
+      "description": "Eighth-note hats, snare on two and four, and a kick that pushes into beat three with `[~ bd]`.",
+      "category": "grooves",
+      "tags": [
+        "drums",
+        "rock"
+      ],
+      "code": "s(\"bd ~ [~ bd] ~, ~ sd ~ sd, hh*8\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:01.000Z",
+      "updated": "2026-10-11T00:00:01.000Z"
+    },
+    {
+      "id": "seed-boom-bap-with-swing",
+      "name": "Boom bap with swing",
+      "description": "`.swingBy(1/3, 4)` delays the second half of each beat to the triplet position. Straight code, lazy feel.",
+      "category": "grooves",
+      "tags": [
+        "drums",
+        "swing",
+        "hip-hop",
+        "swingBy"
+      ],
+      "code": "s(\"bd ~ ~ bd ~ ~ bd ~, ~ sd ~ sd, hh*8\")\n  .swingBy(1/3, 4)",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:02.000Z",
+      "updated": "2026-10-11T00:00:02.000Z"
+    },
+    {
+      "id": "seed-half-time-shuffle",
+      "name": "Half-time shuffle",
+      "description": "Three slots per beat with the middle one silent gives the shuffle. One snare on beat three makes it half-time.",
+      "category": "grooves",
+      "tags": [
+        "drums",
+        "shuffle",
+        "half-time"
+      ],
+      "code": "s(\"[hh ~ hh]*4, bd [~ ~ bd] ~ ~, ~ ~ sd ~\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:03.000Z",
+      "updated": "2026-10-11T00:00:03.000Z"
+    },
+    {
+      "id": "seed-tresillo",
+      "name": "Tresillo",
+      "description": "`bd(3,8)` spreads three kicks over eight steps as evenly as possible: 3 + 3 + 2. It sits under a plain backbeat.",
+      "category": "euclid",
+      "tags": [
+        "drums",
+        "euclidean",
+        "latin"
+      ],
+      "code": "s(\"bd(3,8), ~ sd ~ sd, hh*8\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:04.000Z",
+      "updated": "2026-10-11T00:00:04.000Z"
+    },
+    {
+      "id": "seed-three-euclids",
+      "name": "Three euclids",
+      "description": "Different hit counts and step counts on each voice. The third number rotates a pattern, here moving the rim off the downbeat.",
+      "category": "euclid",
+      "tags": [
+        "drums",
+        "euclidean"
+      ],
+      "code": "s(\"bd(5,16), rim(3,8,2), hh(5,8)\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:05.000Z",
+      "updated": "2026-10-11T00:00:05.000Z"
+    },
+    {
+      "id": "seed-rotating-rim",
+      "name": "Rotating rim",
+      "description": "The rotation can be a pattern too. The same five-hit figure starts one step later every cycle.",
+      "category": "euclid",
+      "tags": [
+        "drums",
+        "euclidean",
+        "alternation"
+      ],
+      "code": "s(\"rim(5,8,<0 1 2 3>), bd*2, hh*4\")",
+      "base": null,
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:06.000Z",
+      "updated": "2026-10-11T00:00:06.000Z"
+    },
+    {
+      "id": "seed-son-clave",
+      "name": "Son clave",
+      "description": "The 3-2 clave is a tresillo followed by two hits in the middle of the second half, so it fits in one short sequence.",
+      "category": "euclid",
+      "tags": [
+        "drums",
+        "euclidean",
+        "latin",
+        "clave"
+      ],
+      "code": "s(\"rim(3,8) [~ rim rim ~], bd*4\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:07.000Z",
+      "updated": "2026-10-11T00:00:07.000Z"
+    },
+    {
+      "id": "seed-amen-style-break",
+      "name": "Amen-style break",
+      "description": "Kick and snare never land together in this break, so they share one sixteen-step sequence. Hats go in a second layer.",
+      "category": "breaks",
+      "tags": [
+        "drums",
+        "breakbeat",
+        "jungle"
+      ],
+      "code": "s(\"bd ~ bd ~ sd ~ ~ sd ~ sd bd bd sd ~ ~ sd, hh*8\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:08.000Z",
+      "updated": "2026-10-11T00:00:08.000Z"
+    },
+    {
+      "id": "seed-fill-every-fourth-bar",
+      "name": "Fill every fourth bar",
+      "description": "`<sd!3 sd*4>` plays a single snare for three cycles and four quick ones on the fourth.",
+      "category": "breaks",
+      "tags": [
+        "drums",
+        "fill",
+        "alternation"
+      ],
+      "code": "s(\"bd ~ [~ bd] ~, ~ sd ~ <sd!3 sd*4>, hh*8\")",
+      "base": null,
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:09.000Z",
+      "updated": "2026-10-11T00:00:09.000Z"
+    },
+    {
+      "id": "seed-two-step",
+      "name": "Two-step",
+      "description": "The drum and bass skeleton: kick on one, snare on two, a late second kick, snare on four.",
+      "category": "breaks",
+      "tags": [
+        "drums",
+        "drum and bass",
+        "dnb"
+      ],
+      "code": "s(\"bd ~ ~ ~ sd ~ ~ ~ ~ ~ bd ~ sd ~ ~ ~, hh*8\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:10.000Z",
+      "updated": "2026-10-11T00:00:10.000Z"
+    },
+    {
+      "id": "seed-travelling-stutter",
+      "name": "Travelling stutter",
+      "description": "`.chunk(4, …)` picks one quarter of the bar per cycle and `.ply(2)` doubles every hit in it.",
+      "category": "breaks",
+      "tags": [
+        "drums",
+        "breakbeat",
+        "chunk",
+        "ply"
+      ],
+      "code": "s(\"bd ~ bd ~ sd ~ ~ sd ~ sd bd bd sd ~ ~ sd\")\n  .chunk(4, x => x.ply(2))",
+      "base": "s(\"bd ~ bd ~ sd ~ ~ sd ~ sd bd bd sd ~ ~ sd\")",
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:11.000Z",
+      "updated": "2026-10-11T00:00:11.000Z"
+    },
+    {
+      "id": "seed-hats-step-aside",
+      "name": "Hats step aside",
+      "description": "Take a backbeat and remove the hat wherever the kick or snare plays. What is left is one hit per sixteenth.",
+      "category": "linear",
+      "tags": [
+        "drums",
+        "linear"
+      ],
+      "code": "s(\"bd hh hh hh sd hh hh bd hh bd hh hh sd hh hh hh\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:12.000Z",
+      "updated": "2026-10-11T00:00:12.000Z"
+    },
+    {
+      "id": "seed-ghosts-in-the-gaps",
+      "name": "Ghosts in the gaps",
+      "description": "The main line leaves every third sixteenth empty. A second layer drops quiet snares into exactly those holes, so the two still never collide.",
+      "category": "linear",
+      "tags": [
+        "drums",
+        "linear",
+        "ghost notes",
+        "gain"
+      ],
+      "code": "stack(\n  s(\"bd hh ~ hh sd ~ hh bd ~ bd hh ~ sd hh ~ hh\"),\n  s(\"~ ~ sd ~ ~ sd ~ ~ sd ~ ~ sd ~ ~ sd ~\").gain(.3)\n)",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:13.000Z",
+      "updated": "2026-10-11T00:00:13.000Z"
+    },
+    {
+      "id": "seed-paradiddle-funk",
+      "name": "Paradiddle funk",
+      "description": "A paradiddle (RLRR LRLL) with the right hand on the hat and the left on the snare, and a kick taking the first note. The gain list accents the backbeat and ghosts the other snares.",
+      "category": "linear",
+      "tags": [
+        "drums",
+        "linear",
+        "funk",
+        "rudiment",
+        "gain"
+      ],
+      "code": "s(\"[bd sd hh hh sd hh sd sd]*2\")\n  .gain(\"[1 .3 .7 .7 1 .7 .3 .3]*2\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:14.000Z",
+      "updated": "2026-10-11T00:00:14.000Z"
+    },
+    {
+      "id": "seed-threes-over-sixteenths",
+      "name": "Threes over sixteenths",
+      "description": "Hat, snare, kick is the classic three-note linear cell. `{…}%16` runs it at sixteen steps per cycle, so it crosses the barline and comes back around after three cycles.",
+      "category": "linear",
+      "tags": [
+        "drums",
+        "linear",
+        "polymeter"
+      ],
+      "code": "s(\"{hh sd bd}%16\")",
+      "base": null,
+      "cycles": 3,
+      "source": null,
+      "created": "2026-10-11T00:00:15.000Z",
+      "updated": "2026-10-11T00:00:15.000Z"
+    },
+    {
+      "id": "seed-hand-hand-foot",
+      "name": "Hand, hand, foot",
+      "description": "A linear fill: two strokes with the hands, one with the kick, as triplets. Moving the hands from snare down the toms does the rest.",
+      "category": "linear",
+      "tags": [
+        "drums",
+        "linear",
+        "fill",
+        "toms",
+        "triplets"
+      ],
+      "code": "s(\"[sd sd bd] [ht ht bd] [mt mt bd] [lt lt bd]\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:16.000Z",
+      "updated": "2026-10-11T00:00:16.000Z"
+    },
+    {
+      "id": "seed-rotate-it",
+      "name": "Rotate it",
+      "description": "A linear pattern stays linear however you rotate it. `.iter(4)` starts the bar one beat later each cycle and gives four grooves from one line.",
+      "category": "linear",
+      "tags": [
+        "drums",
+        "linear",
+        "iter"
+      ],
+      "code": "s(\"bd hh hh sd hh bd sd hh bd hh sd hh hh sd bd hh\")\n  .iter(4)",
+      "base": null,
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:17.000Z",
+      "updated": "2026-10-11T00:00:17.000Z"
+    },
+    {
+      "id": "seed-accented-hats",
+      "name": "Accented hats",
+      "description": "A gain pattern per beat (loud, soft, medium, soft) turns sixteen identical hats into something that breathes.",
+      "category": "feel",
+      "tags": [
+        "drums",
+        "gain",
+        "dynamics"
+      ],
+      "code": "stack(\n  s(\"hh*16\").gain(\"[1 .4 .7 .4]*4\"),\n  s(\"bd ~ [~ bd] ~, ~ sd ~ sd\")\n)",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:18.000Z",
+      "updated": "2026-10-11T00:00:18.000Z"
+    },
+    {
+      "id": "seed-ghost-notes",
+      "name": "Ghost notes",
+      "description": "Keep the backbeat in one layer and put the quiet snares in another with low gain. The ghosts fill the space between kick and snare.",
+      "category": "feel",
+      "tags": [
+        "drums",
+        "ghost notes",
+        "gain",
+        "funk"
+      ],
+      "code": "stack(\n  s(\"hh*8\"),\n  s(\"bd ~ ~ ~ ~ ~ bd ~ ~ ~ bd ~ ~ ~ ~ ~\"),\n  s(\"~ sd ~ sd\"),\n  s(\"~ ~ ~ sd ~ ~ ~ sd ~ sd ~ ~ ~ ~ ~ sd\").gain(.3)\n)",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:19.000Z",
+      "updated": "2026-10-11T00:00:19.000Z"
+    },
+    {
+      "id": "seed-hat-rolls",
+      "name": "Hat rolls",
+      "description": "`.ply()` repeats a hit inside its own step. Give it a pattern and only chosen hats turn into rolls, with a different roll on alternate bars.",
+      "category": "feel",
+      "tags": [
+        "drums",
+        "ply",
+        "trap",
+        "rolls"
+      ],
+      "code": "stack(\n  s(\"hh*8\").ply(\"1 1 1 2 1 1 1 <3 4>\"),\n  s(\"bd ~ ~ bd ~ ~ ~ ~, ~ ~ sd ~\")\n)",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:20.000Z",
+      "updated": "2026-10-11T00:00:20.000Z"
+    },
+    {
+      "id": "seed-coin-flip-hats",
+      "name": "Coin-flip hats",
+      "description": "A question mark gives each hit a 50% chance of playing. The hat line is different every cycle while kick and snare hold still.",
+      "category": "feel",
+      "tags": [
+        "drums",
+        "random",
+        "chance"
+      ],
+      "code": "s(\"bd*2, ~ sd, hh*16?\")",
+      "base": "s(\"bd*2, ~ sd, hh*16\")",
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:21.000Z",
+      "updated": "2026-10-11T00:00:21.000Z"
+    },
+    {
+      "id": "seed-three-against-four",
+      "name": "Three against four",
+      "description": "Multiplying two voices by different numbers inside one cycle is all a polyrhythm needs.",
+      "category": "poly",
+      "tags": [
+        "drums",
+        "polyrhythm"
+      ],
+      "code": "s(\"bd*4, rim*3\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:22.000Z",
+      "updated": "2026-10-11T00:00:22.000Z"
+    },
+    {
+      "id": "seed-three-step-hats-eight-step-bar",
+      "name": "Three-step hats, eight-step bar",
+      "description": "Curly braces keep every layer at the step size of the first. The three-step hat figure drifts against the eight-step kick and snare, and realigns after three cycles.",
+      "category": "poly",
+      "tags": [
+        "drums",
+        "polymeter"
+      ],
+      "code": "s(\"{bd ~ sd ~ bd bd sd ~, hh hh oh}\")",
+      "base": null,
+      "cycles": 3,
+      "source": null,
+      "created": "2026-10-11T00:00:23.000Z",
+      "updated": "2026-10-11T00:00:23.000Z"
+    },
+    {
+      "id": "seed-seven-in-a-bar",
+      "name": "Seven in a bar",
+      "description": "A cycle has no fixed meter. Write seven steps and you are in seven, here grouped 2 + 2 + 3.",
+      "category": "poly",
+      "tags": [
+        "drums",
+        "odd meter",
+        "7/8"
+      ],
+      "code": "s(\"bd ~ sd ~ bd sd ~, hh*7\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:24.000Z",
+      "updated": "2026-10-11T00:00:24.000Z"
+    },
+    {
+      "id": "seed-clapping-phase",
+      "name": "Clapping phase",
+      "description": "After Steve Reich's Clapping Music: the rim plays the clap's twelve-step pattern but starts one step later every cycle.",
+      "category": "poly",
+      "tags": [
+        "drums",
+        "phasing",
+        "reich",
+        "iter",
+        "superimpose"
+      ],
+      "code": "s(\"cp cp cp ~ cp cp ~ cp ~ cp cp ~\")\n  .superimpose(x => x.iter(12).s(\"rim\"))",
+      "base": null,
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:25.000Z",
+      "updated": "2026-10-11T00:00:25.000Z"
+    },
+    {
+      "id": "seed-euclidean-pairs",
+      "name": "Euclidean pairs",
+      "description": "`(3,8)` spreads three hits evenly over eight steps. Put a `(5,8)` above it, rotated by two steps, and the two parts interlock.",
+      "category": "mini",
+      "tags": [
+        "notes",
+        "euclidean",
+        "bass"
+      ],
+      "code": "note(\"c2(3,8), <g3 bb3>(5,8,2)\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:26.000Z",
+      "updated": "2026-10-11T00:00:26.000Z"
+    },
+    {
+      "id": "seed-polymeter-drift",
+      "name": "Polymeter drift",
+      "description": "Five notes read at eight steps per cycle. Each cycle starts on a different note, and the phrase lines up again after five cycles.",
+      "category": "mini",
+      "tags": [
+        "notes",
+        "polymeter",
+        "arpeggio"
+      ],
+      "code": "note(\"{c4 eb4 g4 bb4 d5}%8\")",
+      "base": null,
+      "cycles": 5,
+      "source": null,
+      "created": "2026-10-11T00:00:27.000Z",
+      "updated": "2026-10-11T00:00:27.000Z"
+    },
+    {
+      "id": "seed-nested-alternation",
+      "name": "Nested alternation",
+      "description": "Angle brackets pick one item per cycle. One line becomes a two-bar phrase whose second bar ends differently.",
+      "category": "mini",
+      "tags": [
+        "notes",
+        "alternation",
+        "melody"
+      ],
+      "code": "note(\"c3 <eb3 g3> [f3 <ab3 [bb3 c4]>] g3\")",
+      "base": null,
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:28.000Z",
+      "updated": "2026-10-11T00:00:28.000Z"
+    },
+    {
+      "id": "seed-stretch-and-repeat",
+      "name": "Stretch and repeat",
+      "description": "`@3` holds a note for three steps, `!2` plays one twice. Seven units share the cycle, which gives a lopsided seven-feel.",
+      "category": "mini",
+      "tags": [
+        "notes",
+        "odd meter",
+        "melody"
+      ],
+      "code": "note(\"c3@3 eb3 g3!2 [bb3 c4]\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:29.000Z",
+      "updated": "2026-10-11T00:00:29.000Z"
+    },
+    {
+      "id": "seed-one-shape-two-modes",
+      "name": "One shape, two modes",
+      "description": "Write the contour once as scale degrees, then alternate the scale underneath. The shape stays and the colour changes.",
+      "category": "scales",
+      "tags": [
+        "notes",
+        "scale",
+        "modes",
+        "melody"
+      ],
+      "code": "n(\"0 2 4 7 4 2\").scale(\"<C:minor F:lydian>\")",
+      "base": null,
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:30.000Z",
+      "updated": "2026-10-11T00:00:30.000Z"
+    },
+    {
+      "id": "seed-diatonic-sequence",
+      "name": "Diatonic sequence",
+      "description": "Adding a slow pattern of offsets to the degrees walks the motif down the scale one step per cycle, staying in key.",
+      "category": "scales",
+      "tags": [
+        "notes",
+        "scale",
+        "sequence",
+        "add"
+      ],
+      "code": "n(\"0 2 4 2\")\n  .add(n(\"<0 -1 -2 -3>\"))\n  .scale(\"C:major\")",
+      "base": "n(\"0 2 4 2\").scale(\"C:major\")",
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:31.000Z",
+      "updated": "2026-10-11T00:00:31.000Z"
+    },
+    {
+      "id": "seed-octave-jump-bass",
+      "name": "Octave-jump bass",
+      "description": "Three layers added together: steady eighths, a rhythm of octave leaps, and a root that moves every cycle.",
+      "category": "scales",
+      "tags": [
+        "notes",
+        "scale",
+        "bass",
+        "add"
+      ],
+      "code": "n(\"0*8\")\n  .add(n(\"0 [0 7] 0 7\"))\n  .add(n(\"<0 0 3 4>\"))\n  .scale(\"C2:minor\")",
+      "base": null,
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:32.000Z",
+      "updated": "2026-10-11T00:00:32.000Z"
+    },
+    {
+      "id": "seed-parallel-triads",
+      "name": "Parallel triads",
+      "description": "Adding the stack `[0,2,4]` puts a third and a fifth on every step. The scale decides which triads come out major or minor.",
+      "category": "scales",
+      "tags": [
+        "notes",
+        "scale",
+        "chords",
+        "add"
+      ],
+      "code": "n(\"0 3 4 2\")\n  .add(n(\"[0,2,4]\"))\n  .scale(\"C:major\")",
+      "base": "n(\"0 3 4 2\").scale(\"C:major\")",
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:33.000Z",
+      "updated": "2026-10-11T00:00:33.000Z"
+    },
+    {
+      "id": "seed-arp-by-index",
+      "name": "Arp by index",
+      "description": "`.arp()` takes a pattern of chord-tone indices, so the picking order has its own rhythm, separate from the changes.",
+      "category": "chords",
+      "tags": [
+        "notes",
+        "arpeggio",
+        "chords",
+        "arp"
+      ],
+      "code": "note(\"<[c3,eb3,g3,bb3] [f3,a3,c4,eb4] [bb2,d3,f3,a3] [eb3,g3,bb3,d4]>\")\n  .arp(\"0 [1 2] 3 [2 1]\")",
+      "base": null,
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:34.000Z",
+      "updated": "2026-10-11T00:00:34.000Z"
+    },
+    {
+      "id": "seed-voice-led-comping",
+      "name": "Voice-led comping",
+      "description": "`.voicing()` turns chord symbols into close voicings and keeps the voices moving as little as possible. `.struct()` gives them a rhythm.",
+      "category": "chords",
+      "tags": [
+        "notes",
+        "chords",
+        "voicing",
+        "jazz",
+        "euclidean"
+      ],
+      "code": "chord(\"<Cm7 F7 Bb^7 Eb^7>\")\n  .voicing()\n  .struct(\"x(3,8)\")",
+      "base": null,
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:35.000Z",
+      "updated": "2026-10-11T00:00:35.000Z"
+    },
+    {
+      "id": "seed-echo-a-fifth-up",
+      "name": "Echo a fifth up",
+      "description": "`.off()` lays a shifted copy over the original. Shift it an eighth of a cycle and raise it four degrees for instant counterpoint.",
+      "category": "layers",
+      "tags": [
+        "notes",
+        "off",
+        "counterpoint",
+        "scale"
+      ],
+      "code": "n(\"0 [2 4] <3 5> [~ 7]\")\n  .off(1/8, x => x.add(n(4)))\n  .scale(\"D:dorian\")",
+      "base": "n(\"0 [2 4] <3 5> [~ 7]\").scale(\"D:dorian\")",
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:36.000Z",
+      "updated": "2026-10-11T00:00:36.000Z"
+    },
+    {
+      "id": "seed-augmentation-canon",
+      "name": "Augmentation canon",
+      "description": "The copy plays the same line at half speed, an octave up. A classical canon device in one call.",
+      "category": "layers",
+      "tags": [
+        "notes",
+        "canon",
+        "superimpose",
+        "slow"
+      ],
+      "code": "n(\"0 1 2 3 4 5 6 7\")\n  .superimpose(x => x.slow(2).add(n(7)))\n  .scale(\"C:major\")",
+      "base": "n(\"0 1 2 3 4 5 6 7\").scale(\"C:major\")",
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:37.000Z",
+      "updated": "2026-10-11T00:00:37.000Z"
+    },
+    {
+      "id": "seed-echo-staircase",
+      "name": "Echo staircase",
+      "description": "`.echoWith()` hands each repeat its index. Use it to climb two degrees per echo and one note becomes a run.",
+      "category": "layers",
+      "tags": [
+        "notes",
+        "echoWith",
+        "run",
+        "scale"
+      ],
+      "code": "n(\"<0 3 -1 2> ~ ~ ~\")\n  .echoWith(4, 1/8, (p, i) => p.add(n(i * 2)))\n  .scale(\"C:minor\")",
+      "base": "n(\"<0 3 -1 2> ~ ~ ~\").scale(\"C:minor\")",
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:38.000Z",
+      "updated": "2026-10-11T00:00:38.000Z"
+    },
+    {
+      "id": "seed-step-phasing",
+      "name": "Step phasing",
+      "description": "The lower copy slips one more step behind each cycle, so the two lines drift apart in the manner of Steve Reich's phase pieces.",
+      "category": "layers",
+      "tags": [
+        "notes",
+        "phasing",
+        "reich",
+        "superimpose",
+        "late"
+      ],
+      "code": "n(\"0 1 4 5 6 1 0 5\")\n  .superimpose(x => x.late(\"<0 .125 .25 .375>\").sub(n(7)))\n  .scale(\"E:dorian\")",
+      "base": "n(\"0 1 4 5 6 1 0 5\").scale(\"E:dorian\")",
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:39.000Z",
+      "updated": "2026-10-11T00:00:39.000Z"
+    },
+    {
+      "id": "seed-rotating-start",
+      "name": "Rotating start",
+      "description": "`.iter(4)` starts the phrase a quarter later each cycle. Four bars of variation from one bar of notes.",
+      "category": "time",
+      "tags": [
+        "notes",
+        "iter",
+        "pentatonic"
+      ],
+      "code": "n(\"0 1 2 4 5 4 2 1\")\n  .iter(4)\n  .scale(\"C:minor:pentatonic\")",
+      "base": null,
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:40.000Z",
+      "updated": "2026-10-11T00:00:40.000Z"
+    },
+    {
+      "id": "seed-there-and-back",
+      "name": "There and back",
+      "description": "`.palindrome()` plays every second cycle backwards. Rests flip too, so the rhythm mirrors along with the melody.",
+      "category": "time",
+      "tags": [
+        "notes",
+        "palindrome",
+        "reverse"
+      ],
+      "code": "n(\"0 2 3 5 7 ~ 4 ~\")\n  .palindrome()\n  .scale(\"A:minor\")",
+      "base": null,
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:41.000Z",
+      "updated": "2026-10-11T00:00:41.000Z"
+    },
+    {
+      "id": "seed-ratchets",
+      "name": "Ratchets",
+      "description": "`.ply()` repeats each note inside its own step. Pattern the amount and the line tightens from quarters to sixteenths.",
+      "category": "time",
+      "tags": [
+        "notes",
+        "ply",
+        "ratchet"
+      ],
+      "code": "n(\"0 4 2 7\")\n  .ply(\"<1 2 3 4>\")\n  .scale(\"C:major\")",
+      "base": null,
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:42.000Z",
+      "updated": "2026-10-11T00:00:42.000Z"
+    },
+    {
+      "id": "seed-travelling-octave",
+      "name": "Travelling octave",
+      "description": "`.chunk(4, …)` applies a change to one quarter of the cycle, then moves to the next quarter. Here that quarter jumps up an octave.",
+      "category": "time",
+      "tags": [
+        "notes",
+        "chunk",
+        "octave"
+      ],
+      "code": "n(\"0 1 2 3 4 5 6 7\")\n  .chunk(4, x => x.add(n(7)))\n  .scale(\"C:major\")",
+      "base": "n(\"0 1 2 3 4 5 6 7\").scale(\"C:major\")",
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:43.000Z",
+      "updated": "2026-10-11T00:00:43.000Z"
+    },
+    {
+      "id": "seed-can-t-miss-random",
+      "name": "Can't-miss random",
+      "description": "`irand(8)` gives random whole numbers and `.segment(8)` samples it eight times a cycle. A pentatonic scale makes every outcome sound intended.",
+      "category": "gen",
+      "tags": [
+        "notes",
+        "random",
+        "irand",
+        "pentatonic"
+      ],
+      "code": "n(irand(8).segment(8))\n  .scale(\"A:minor:pentatonic\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:44.000Z",
+      "updated": "2026-10-11T00:00:44.000Z"
+    },
+    {
+      "id": "seed-perlin-contour",
+      "name": "Perlin contour",
+      "description": "`perlin` is smooth noise, so neighbouring samples sit close together. The result wanders in steps instead of leaping around.",
+      "category": "gen",
+      "tags": [
+        "notes",
+        "random",
+        "perlin",
+        "noise"
+      ],
+      "code": "n(perlin.range(0, 10).segment(16).round())\n  .scale(\"D:minor\")",
+      "base": null,
+      "cycles": 2,
+      "source": null,
+      "created": "2026-10-11T00:00:45.000Z",
+      "updated": "2026-10-11T00:00:45.000Z"
+    },
+    {
+      "id": "seed-thinning",
+      "name": "Thinning",
+      "description": "`.degradeBy(0.4)` drops about 40% of the notes at random. A busy line turns into a different sparse one every cycle.",
+      "category": "gen",
+      "tags": [
+        "notes",
+        "random",
+        "degradeBy"
+      ],
+      "code": "n(\"0 2 4 7 9 7 4 2\")\n  .degradeBy(0.4)\n  .scale(\"C:minor\")",
+      "base": "n(\"0 2 4 7 9 7 4 2\").scale(\"C:minor\")",
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:46.000Z",
+      "updated": "2026-10-11T00:00:46.000Z"
+    },
+    {
+      "id": "seed-coin-flip-steps",
+      "name": "Coin-flip steps",
+      "description": "A pipe inside brackets chooses one option at random each cycle. Fix the downbeat and let the other steps vary.",
+      "category": "gen",
+      "tags": [
+        "notes",
+        "random",
+        "choice"
+      ],
+      "code": "n(\"0 [2|4] [3|5|6] [7|9]\")\n  .scale(\"C:minor\")",
+      "base": null,
+      "cycles": 4,
+      "source": null,
+      "created": "2026-10-11T00:00:47.000Z",
+      "updated": "2026-10-11T00:00:47.000Z"
+    }
+  ],
+  "deleted": []
+}
