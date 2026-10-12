@@ -72,11 +72,3 @@ switched on or off in the editor; with vim on, the first `Esc` leaves insert mod
 
 `base` is an optional second pattern. The grid highlights hits the code adds compared with it (orange),
 and draws the hits it removes as dashed outlines.
-
-## Notes
-
-- Sample maps and samples load from Strudel's CDN (`strudel.b-cdn.net` and GitHub) the first time they
-  play. After that, the service worker caches them for offline use.
-- Strudel is AGPL-3.0-or-later, and this app bundles it, so the app is AGPL too. If you serve it
-  publicly, link to its source.
-- Dependencies were reviewed before installing; see `plans/01-snippet-library.md`. Ask before adding more.
