@@ -31,6 +31,13 @@
       Everything is stored in this browser only. Export a backup with <kbd>x</kbd> now and then, and import it
       with <kbd>X</kbd> to move your library elsewhere.
     </p>
+    <p class="muted note">
+      This is a fun thing I made because I wanted it to exist. It is very much a work in progress, things will likely break
+      and I may change how things work in future. Please don't take it too seriously as a "product".
+    </p>
+    <p class="muted note">
+      This is published under the AGPLv3 license. Source code is available on <a href="https://github.com/jd-13/strudel-scrapbook" target="_blank" rel="noopener">GitHub</a>.
+    </p>
     <div class="row end">
       <button type="button" onclick={onkeys}>See all keys <kbd>?</kbd></button>
       <button type="button" class="primary" onclick={onclose}>Get started <kbd>Enter</kbd></button>
